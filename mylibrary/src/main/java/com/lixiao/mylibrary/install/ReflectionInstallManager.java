@@ -1,12 +1,11 @@
-package com.lixiao.mylibrary;
+package com.lixiao.mylibrary.install;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.pm.IPackageInstallObserver;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.RemoteException;
-import android.util.Log;
+
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -58,14 +57,14 @@ public class ReflectionInstallManager {
             while ((line = errorStream.readLine()) != null) {
                 msg += line;
             }
-            Log.d("TAG", "install msg is " + msg);
+//            Log.d("TAG", "install msg is " + msg);
             // 如果执行结果中包含Failure字样就认为是安装失败，否则就认为安装成功
             if (!msg.contains("Failure")) {
                 result = true;
 
             }
         } catch (Exception e) {
-            Log.i(tag, "compulsoryInstall>>>"+ e.toString());
+//            Log.i(tag, "compulsoryInstall>>>"+ e.toString());
 
         } finally {
             try {
@@ -76,7 +75,7 @@ public class ReflectionInstallManager {
                     errorStream.close();
                 }
             } catch (IOException e) {
-                Log.e("TAG", e.getMessage(), e);
+//                Log.e("TAG", e.getMessage(), e);
             }
         }
         return result;
@@ -141,13 +140,13 @@ public class ReflectionInstallManager {
             result = false;
 
         }
-        Log.d("test-test", "successMsg:" + successMsg + ", ErrorMsg:" + errorMsg);
+//        Log.d("test-test", "successMsg:" + successMsg + ", ErrorMsg:" + errorMsg);
         return result;
     }
 
 
-    public static  boolean installSilentWithReflection(Activity context, String filePath, InstallImp installImp, String pageName) {
-        Log.d(tag, "--o----packageInstalled =ee0: ---------");
+    public static  boolean installSilentWithReflection(Context context, String filePath, InstallImp installImp, String pageName) {
+//        Log.d(tag, "--o----packageInstalled =ee0: ---------");
         try {
             PackageManager packageManager = context.getPackageManager();
             Method method = packageManager.getClass().getDeclaredMethod("installPackage",
@@ -158,28 +157,22 @@ public class ReflectionInstallManager {
             method.invoke(packageManager, new Object[]{apkUri, new IPackageInstallObserver.Stub() {
                 @Override
                 public void packageInstalled(String pkgName, int resultCode) throws RemoteException {
-                    Log.d(tag, "--o----packageInstalled = " + pkgName + "; resultCode = " + resultCode);
-                    if(resultCode==2){
-                        if(null!=installImp){
-                            installImp.installIsOk();
-                        }
-                    }else {
-                        if(null!=installImp){
-                            installImp.isSystemInstall();
-                        }
-                        SystemInstallManager.install(context,filePath);
+//                    Log.d(tag, "--o----packageInstalled = " + pkgName + "; resultCode = " + resultCode);
+                    if(null!=installImp){
+                        installImp.installIsOk();
                     }
+
                 }
             }, Integer.valueOf(2), pageName});
-            //PackageManager.INSTALL_REPLACE_EXISTING = 2;
+//            PackageManager.INSTALL_REPLACE_EXISTING = 2;
             return true;
         }
         catch (InvocationTargetException e){
-            Log.d(tag, "--o----packageInstalled =ee2: "+e.toString() );
+//            Log.d(tag, "--o----packageInstalled =ee2: "+e.toString() );
         }catch (NoSuchMethodException e) {
-            Log.d(tag, "--o----packageInstalled =ee3: "+e.toString() );
+//            Log.d(tag, "--o----packageInstalled =ee3: "+e.toString() );
         } catch (Exception e) {
-            Log.d(tag, "--o----packageInstalled =ee4: "+e.toString() );
+//            Log.d(tag, "--o----packageInstalled =ee4: "+e.toString() );
 
         }
         return  false;

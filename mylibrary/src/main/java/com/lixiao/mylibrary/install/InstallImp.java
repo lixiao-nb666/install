@@ -1,4 +1,4 @@
-package com.lixiao.mylibrary;
+package com.lixiao.mylibrary.install;
 
 public interface InstallImp{
         public void installIsOk();

@@ -1,4 +1,4 @@
-package com.lixiao.mylibrary;
+package com.lixiao.mylibrary.install;
 
 import android.annotation.TargetApi;
 import android.app.PendingIntent;
@@ -83,13 +83,12 @@ public class SilentInstallManager {
         } finally {
             try {
                 out.close();
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
- 
             try {
                 in.close();
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             session.close();
