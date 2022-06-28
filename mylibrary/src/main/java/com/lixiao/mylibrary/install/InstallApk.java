@@ -54,7 +54,9 @@ public class InstallApk {
 
                 }
                if(!new File(path).exists()){
+                   installImp.installIsErr();
                    InstallSubscriptionSubject.getInstance().installErr("installApk err: file no exists --"+path);
+                   return;
                }
                 if(auto){
                     boolean isInstallEd=false;
