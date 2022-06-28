@@ -1,5 +1,7 @@
 package com.lixiao.mylibrary.install.observer;
 
+import android.content.Context;
+
 public interface InstallSubject {
     public void addObserver(InstallObserver baseObserver);
 
@@ -14,4 +16,6 @@ public interface InstallSubject {
     public void getPermissionErr();
 
     public void installErr(String errStr);
+
+    public void needSystemInstallByFileProvider(Context context, String apkPath);
 }

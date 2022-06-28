@@ -1,5 +1,7 @@
 package com.lixiao.mylibrary.install.observer;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,4 +63,13 @@ public class InstallSubscriptionSubject implements InstallSubject {
             observer.installErr(errStr);
         }
     }
+
+    @Override
+    public void needSystemInstallByFileProvider(Context context, String apkPath) {
+        for (InstallObserver observer : observerList) {
+            observer.needSystemInstallByFileProvider(context,apkPath);
+        }
+    }
+
+
 }

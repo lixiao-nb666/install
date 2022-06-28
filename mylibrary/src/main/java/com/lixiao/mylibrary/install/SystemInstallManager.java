@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
-import androidx.core.content.FileProvider;
+
 import com.lixiao.mylibrary.install.observer.InstallSubscriptionSubject;
 
 import java.io.File;
@@ -31,7 +31,7 @@ public class SystemInstallManager {
                        InstallSubscriptionSubject.getInstance().installErr("onActivityResult:want to auto install apk,but !!context == null");
                    }else {
                        for(String apkPath:needApkPaths){
-                            installByFileProvider(context,apkPath);
+                           InstallSubscriptionSubject.getInstance().needSystemInstallByFileProvider(context,apkPath);
                        }
                    }
                }
@@ -79,10 +79,11 @@ public class SystemInstallManager {
                     needApkPaths.add(apkPath);
                     InstallSubscriptionSubject.getInstance().nowActivityNeedRequestPermission();
                 }else{
-                    installByFileProvider(context,apkPath);
+                    InstallSubscriptionSubject.getInstance().needSystemInstallByFileProvider(context,apkPath);
+
                 }
             } else {
-                installByFileProvider(context,apkPath);
+                InstallSubscriptionSubject.getInstance().needSystemInstallByFileProvider(context,apkPath);
             }
         } else {
             Intent install = new Intent(Intent.ACTION_VIEW);
@@ -92,13 +93,6 @@ public class SystemInstallManager {
         }
     }
 
-    public static void installByFileProvider(Context context,String apkPath){
-        Uri apkUri = FileProvider.getUriForFile(context, context.getPackageName() + ".fileprovider", new File(apkPath));
-        Intent install = new Intent(Intent.ACTION_VIEW);
-        install.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        install.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        install.setDataAndType(apkUri, "application/vnd.android.package-archive");
-        context.startActivity(install);
-    }
+
 
 }
