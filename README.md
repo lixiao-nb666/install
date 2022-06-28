@@ -3,11 +3,11 @@
 
 
 * 24版本SDK以上需要导入下面这个类
-  import android.content.Context;
-  import android.content.Intent;
-  import android.net.Uri;
-     import androidx.core.content.FileProvider;
-     import java.io.File;
+  * import android.content.Context;
+    import android.content.Intent;
+    import android.net.Uri;
+       import androidx.core.content.FileProvider;
+       import java.io.File;
 
   public class SystemInstallManagerByFileProvider {
 
@@ -32,12 +32,12 @@
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths"  />
-        </provider>
+             </provider>
 
 
 * 24版本SDK以上需要在xml加入file_path.xml
-* <?xml version="1.0" encoding="utf-8"?>
-<paths>
-	<!--    <external-path path="Android/data/app的包名/" name="files_root" />-->
-	<external-path path="." name="external_storage_root" />
-</paths>
+*       <?xml version="1.0" encoding="utf-8"?>
+        <paths>
+	    <!--    <external-path path="Android/data/app的包名/" name="files_root" />-->
+	    <external-path path="." name="external_storage_root" />
+        </paths>
