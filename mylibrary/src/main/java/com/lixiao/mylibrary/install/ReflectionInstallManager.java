@@ -1,7 +1,7 @@
 package com.lixiao.mylibrary.install;
 
 import android.content.Context;
-import android.content.pm.IPackageInstallObserver;
+
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.RemoteException;
@@ -145,39 +145,39 @@ public class ReflectionInstallManager {
     }
 
 
-    public static  boolean installSilentWithReflection(Context context, String filePath, InstallImp installImp, String pageName) {
-//        Log.d(tag, "--o----packageInstalled =ee0: ---------");
-        try {
-            PackageManager packageManager = context.getPackageManager();
-            Method method = packageManager.getClass().getDeclaredMethod("installPackage",
-                    new Class[]{Uri.class, IPackageInstallObserver.class, int.class, String.class});
-            method.setAccessible(true);
-            File apkFile = new File(filePath);
-            Uri apkUri = Uri.fromFile(apkFile);
-            method.invoke(packageManager, new Object[]{apkUri, new IPackageInstallObserver.Stub() {
-                @Override
-                public void packageInstalled(String pkgName, int resultCode) throws RemoteException {
-//                    Log.d(tag, "--o----packageInstalled = " + pkgName + "; resultCode = " + resultCode);
-                    if(null!=installImp){
-                        installImp.installIsOk();
-                    }
-
-                }
-            }, Integer.valueOf(2), pageName});
-//            PackageManager.INSTALL_REPLACE_EXISTING = 2;
-            return true;
-        }
-        catch (InvocationTargetException e){
-//            Log.d(tag, "--o----packageInstalled =ee2: "+e.toString() );
-        }catch (NoSuchMethodException e) {
-//            Log.d(tag, "--o----packageInstalled =ee3: "+e.toString() );
-        } catch (Exception e) {
-//            Log.d(tag, "--o----packageInstalled =ee4: "+e.toString() );
-
-        }
-        return  false;
-
-    }
+//    public static  boolean installSilentWithReflection(Context context, String filePath, InstallImp installImp, String pageName) {
+////        Log.d(tag, "--o----packageInstalled =ee0: ---------");
+//        try {
+//            PackageManager packageManager = context.getPackageManager();
+//            Method method = packageManager.getClass().getDeclaredMethod("installPackage",
+//                    new Class[]{Uri.class, IPackageInstallObserver.class, int.class, String.class});
+//            method.setAccessible(true);
+//            File apkFile = new File(filePath);
+//            Uri apkUri = Uri.fromFile(apkFile);
+//            method.invoke(packageManager, new Object[]{apkUri, new IPackageInstallObserver.Stub() {
+//                @Override
+//                public void packageInstalled(String pkgName, int resultCode) throws RemoteException {
+////                    Log.d(tag, "--o----packageInstalled = " + pkgName + "; resultCode = " + resultCode);
+//                    if(null!=installImp){
+//                        installImp.installIsOk();
+//                    }
+//
+//                }
+//            }, Integer.valueOf(2), pageName});
+////            PackageManager.INSTALL_REPLACE_EXISTING = 2;
+//            return true;
+//        }
+//        catch (InvocationTargetException e){
+////            Log.d(tag, "--o----packageInstalled =ee2: "+e.toString() );
+//        }catch (NoSuchMethodException e) {
+////            Log.d(tag, "--o----packageInstalled =ee3: "+e.toString() );
+//        } catch (Exception e) {
+////            Log.d(tag, "--o----packageInstalled =ee4: "+e.toString() );
+//
+//        }
+//        return  false;
+//
+//    }
 
 
 

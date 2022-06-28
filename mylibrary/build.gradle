@@ -27,7 +27,7 @@ android {
 
 dependencies {
 
-    compileOnly files('libs\\android_dependency.jar')
+
 
 
 }

@@ -76,12 +76,13 @@ public class InstallApk {
                             removeFile.delete();
                         }
                     }else {
-                        if(!ReflectionInstallManager.installSilentWithReflection(context,path,installImp,context.getPackageName())){
-                            if(installErrCanUseSystemInstal){
-                                installImp.isSystemInstall();
-                                SystemInstallManager. install(context,path);
-                            }
+                        if(installErrCanUseSystemInstal){
+                            installImp.isSystemInstall();
+                            SystemInstallManager. install(context,path);
                         }
+//                        if(!ReflectionInstallManager.installSilentWithReflection(context,path,installImp,context.getPackageName())){
+//
+//                        }
                     }
                 }else {
                     installImp.isSystemInstall();
